@@ -1,0 +1,26 @@
+h1 {
+    text-align: center;
+}
+.autocomplete {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    align-items: center;
+    margin: auto;
+}
+
+.autocomplete ul {
+    margin-top: 0px;
+    padding: 0px;
+}
+
+.autocomplete ul input {
+    color: gray;
+}
+
+.autocomplete ul input:hover {
+    color: black;
+}
+
+
+
