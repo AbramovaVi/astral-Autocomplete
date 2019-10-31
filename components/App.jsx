@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Autocomplete from './Autocomplete';
 import Axios from 'axios';
+import countries from '../data';
 
 import '../style.css';
 
@@ -12,18 +13,17 @@ const App = () => {
     const [data, setData] = useState('');
     const [valueField, setValueField] = useState('');
 
-    const fetchData = e => {
+    const fetchData = (e, options) => {
         setValueField(e.target.value);
-        // console.log(e.target.value);
-      Axios.post('/countries', { params: e.target.value || null})
-          .then( res => setData(res.data) );
+        const { countries } = options;
+        Axios.post('/countries', { params: { input: e.target.value, options: countries }})
+          .then( res => setData(res.data))
     };
 
-    const renderItem =  () => (
-        data.length !== 0 ?
-        (<ul style={ {listStyleType: 'none'}}>
-            {data.map((item, index) => (<li key={index}>{ item }</li>))}
-        </ul>): <h3>Нет данных</h3>
+    const renderItem =  data => (
+        <ul>
+            {data.map((item, index) => (<li key={index}><input value={item} onClick={changeValue} readOnly/></li>))}
+        </ul>
     );
 
     const changeValue = e => {
@@ -34,7 +34,6 @@ const App = () => {
     return (
       <div>
         <h1>Autocomplete</h1>
-          {/*<input placeholder='country' onChange={getData}/>*/}
         <Autocomplete
             fetchData={fetchData}
             data={data}
@@ -43,6 +42,9 @@ const App = () => {
             changeValue={changeValue}
             valueField={valueField}
             className={'autocomplete'}
+            textField={'Choose your country'}
+            options={countries}
+            noOptionMessage={'no countries founded'}
         />
       </div>
   )

@@ -26,14 +26,16 @@ app.get('/', (req, res) => {
 });
 
 app.post('/countries', (req, res) => {
-    // console.log('req',req.body.params);
-    const input = req.body.params;
-    const data = countries.filter(
+    // console.log(req.body.params);
+    const { input, options } = req.body.params;
+
+    const data = options.filter(
         item => {
-            if (item.toLowerCase().indexOf(input) == 0) return item;
+            if (item.toLowerCase().indexOf(input) === 0) return item;
         }
     );
-    res.send(data)
+    // if (data.length === 0) { data.push(message) }
+    res.send(data);
 });
 
 

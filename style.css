@@ -12,6 +12,7 @@ h1 {
 .autocomplete ul {
     margin-top: 0px;
     padding: 0px;
+    list-style-type: none;
 }
 
 .autocomplete ul input {
@@ -20,6 +21,11 @@ h1 {
 
 .autocomplete ul input:hover {
     color: black;
+}
+
+.autocomplete p {
+    margin: 0px;
+    padding: 5px;
 }
 
 
